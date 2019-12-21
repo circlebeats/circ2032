@@ -1,0 +1,54 @@
+.page-enter-active, .page-leave-active {
+  /*transition: all ease-in-out 400ms;*/
+}
+.page-enter, .page-leave-to {
+  /*background-color: #0e0e0e;*/
+}
+
+/*HEADINGS*/
+/*CURSIVE*/
+h1.cursive{
+  font-size: 60px;
+  font-family: 'Damion', sans-serif;
+  font-weight: 600;
+}
+h3.cursive{
+  font-family: 'Damion', sans-serif;
+  font-size: 26px;
+}
+/*REGULAR*/
+h2.reg{
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  text-decoration: none;
+}
+h3.reg{
+  font-family: 'Nunito', sans-serif;
+  font-size: 26px;
+}
+h4.reg{
+  font-size: 14px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 400;
+  color: hsla(0, 0%, 100%, 0.52);
+}
+
+
+/*BODY*/
+/*ONE-PAGE(op)*/
+.opBody{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  background-color: #0e0e0e;
+  height: 84vh;
+}
+.opContain{
+  /*TODO: Chnage width to percentage*/
+  width: 940px;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: stretch;
+}
