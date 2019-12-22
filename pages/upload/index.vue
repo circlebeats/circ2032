@@ -99,8 +99,7 @@
               console.log(res)
             })
         }
-      },
-
+      }
     }
 </script>
 
