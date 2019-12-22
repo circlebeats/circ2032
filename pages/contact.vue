@@ -57,7 +57,7 @@
           this.message = input.target.value
         },
         onSubmit: function(){
-          this.$axios.$post('http://127.0.0.1:3001/contact',{
+          this.$axios.$post('http://35.203.65.95:80/contact',{
             title: this.title,
             email: this.email,
             message: this.message

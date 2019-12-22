@@ -82,19 +82,19 @@
           stemFd.append('stemsFile', this.StemsSelectedFile)
           imageFd.append('imageFile', this.ImageSelectedFile)
 
-          await this.$axios.$post('http://127.0.0.1:3001/beats/mp3', mp3Fd)
+          await this.$axios.$post('http://35.203.65.95:80/beats/mp3', mp3Fd)
             .then(res=>{
               console.log(res)
             })
-          await this.$axios.$post('http://127.0.0.1:3001/beats/wav', wavFd)
+          await this.$axios.$post('http://35.203.65.95:80/beats/wav', wavFd)
             .then(res=>{
               console.log(res)
             })
-          await this.$axios.$post('http://127.0.0.1:3001/beats/stems', stemFd)
+          await this.$axios.$post('http://35.203.65.95:80/beats/stems', stemFd)
             .then(res=>{
               console.log(res)
             })
-          await this.$axios.$post('http://127.0.0.1:3001/beats/images', imageFd)
+          await this.$axios.$post('http://35.203.65.95:80/beats/images', imageFd)
             .then(res=>{
               console.log(res)
             })
