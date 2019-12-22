@@ -1,7 +1,8 @@
-module.exports = {
+{
 	apps : [{
+		name:"nuxt",
 		script:"npm",
-		args:"dev",
+		args:"run dev",
 		instaces: "max",
 		exec_mode:"cluster"
 	}]
