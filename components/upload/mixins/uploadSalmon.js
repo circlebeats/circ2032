@@ -55,7 +55,7 @@ export const uploadSalmon = {
           this.$store.commit('forms/toggleImages')
         });
 
-      if (this.$store.state.forms.stems === false && this.$store.state.forms.mp3 === true && this.$store.state.forms.wav === true && this.$store.state.forms.images === true){
+      if (this.$store.state.forms.stems === true && this.$store.state.forms.mp3 === true && this.$store.state.forms.wav === true && this.$store.state.forms.images === true){
         this.$store.commit('forms/toggleValid')
       }
 
