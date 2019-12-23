@@ -20,12 +20,6 @@
           :tag1="tag1"
           :tag2="tag2"
         />
-        <!--        <div class="trackInfo">
-
-                  <div class="tagHolder">
-
-                  </div>
-                </div>-->
       </div>
     </div>
   </div>

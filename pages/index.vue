@@ -8,10 +8,10 @@
         <HomepageBeatHolder
           v-if="beat.fid <= 5"
           v-for="beat in this.$store.getters.allBeats"
-          :key="beat.id" :title="beat.title"
+          :key="beat.title" :title="beat.title"
           :producer="beat.producer"
-          :tag1="beat.tag1"
-          :tag2="beat.tag2"
+          :tag1="beat.userTag1"
+          :tag2="beat.filterTag2"
           :url="beat.url"
           :plays="beat.plays"
         />
