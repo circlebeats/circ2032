@@ -88,7 +88,7 @@
       components: {UploadSalmonForm},
       methods:{
         async dbUpload() {
-          await this.$axios.$post('http://127.0.0.1:3001/beatsFull',{
+          await this.$axios.$post('http://35.203.87.148:80/beatsFull',{
             title: this.title,
             userTag1: this.userTag1,
             userTag2: this.userTag2,
@@ -130,19 +130,19 @@
         selectedGenre: async function (e) {
           console.log(e)
           if (e === 'Trap'){
-            const trapFilteredTags = await this.$axios.$get('http://127.0.0.1:3001/tags/trap')
+            const trapFilteredTags = await this.$axios.$get('http://35.203.87.148:80/tags/trap')
             this.tags = trapFilteredTags
           }else if(e === 'Hip Hop'){
-            const hiphopFilteredTags = await this.$axios.$get('http://127.0.0.1:3001/tags/hiphop')
+            const hiphopFilteredTags = await this.$axios.$get('http://35.203.87.148:80/tags/hiphop')
             this.tags = hiphopFilteredTags
           }else if(e === 'R&B'){
-            const rbFilteredTags = await this.$axios.$get('http://127.0.0.1:3001/tags/r&b')
+            const rbFilteredTags = await this.$axios.$get('http://35.203.87.148:80/tags/r&b')
             this.tags = rbFilteredTags
           }else if(e === 'EDM'){
-            const rbFilteredTags = await this.$axios.$get('http://127.0.0.1:3001/tags/edm')
+            const rbFilteredTags = await this.$axios.$get('http://35.203.87.148:80/tags/edm')
             this.tags = rbFilteredTags
           }else if(e === 'Pop'){
-            const rbFilteredTags = await this.$axios.$get('http://127.0.0.1:3001/tags/pop')
+            const rbFilteredTags = await this.$axios.$get('http://35.203.87.148:80/tags/pop')
             this.tags = rbFilteredTags
           }
         }
