@@ -50,5 +50,12 @@ h4.reg{
   display: flex;
   flex-direction: column;
   justify-items: center;
-  align-items: stretch;
+  align-items: center;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
 }

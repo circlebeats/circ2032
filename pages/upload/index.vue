@@ -2,130 +2,156 @@
   <div class="opBody">
     <div class="opContain">
       <h1 class="cursive">Upload</h1>
+        <div class="formHolder">
+          <UploadSalmonForm/>
+          <transition name="slide-fade">
+            <div v-if="uplStage === 'stage one'">
+              <form class="formInfo">
+                <label for="title">Title</label>
+                <input class="formInput" type="text" id="title" @change="onTitleComplete">
+                <label for="tag1">Tag</label>
+                <input class="formInput"  type="text" id="tag1" @change="onTag1Complete">
+                <input class="formInput" type="text" id="tag2" @change="onTag2Complete">
+                <label for="bpm">BPM</label>
+                <input class="formInput" type="text" id="bpm" @change="onBPMComplete">
+<!--                <label for="genre">Genre</label>
+                <select id="genre" v-model="selected">
+                  <option disabled value="">Please select one</option>
+                  <option>A</option>
+                  <option>B</option>
+                  <option>C</option>
+                </select>-->
+                <label for="genreDropdown">Choose Genre</label>
+                <select v-model="selectedGenre" @change="onGenreComplete" id="genreDropdown">
+                  <option disabled value="">Genre</option>
+                  <option v-for="genre in genres" :key="genre.name">
+                    {{ genre.name }}
+                  </option>
+                </select>
+                <label for="subGenre">SubGenre (choose 2)</label>
+                <select v-model="filterTag1" @change="onFilterTag1Complete" id="filterTag1" multiple>
+                  <option v-for="tag in tags" :key="tag">
+                    {{ tag }}
+                  </option>
+                </select>
+                <select v-model="filterTag2" @change="onFilterTag2Complete" id="filterTag2" multiple>
+                  <option v-for="tag in tags" :key="tag">
+                    {{ tag }}
+                  </option>
+                </select>
+                <input type="text" placeholder="confirm producer name" @change="onConfirmComplete">
+                <button @click="dbUpload">Confirm Upload</button>
+              </form>
+            </div>
+          </transition>
+        </div>
 
-      <form @submit.prevent="onSubmit"
-        id="uploadForm"
-      >
-        <label class="uplBtn">
-          <input type="file" @change="onImageSelected">
-          Image Upload
-        </label>
-
-        <div class="uploadHolder">
-          <h2 class="reg">
-            MP3 Upload
-          </h2>
-          <h4 class="reg">(Max file size 5)</h4>
-          <label class="uplBtn">
-            <input type="file"@change="onMP3Selected"/>
-            Upload
-          </label>
-        </div>
-        <div class="uploadHolder">
-          <h2 class="reg">
-            Wav Upload
-          </h2>
-          <h4 class="reg">(Max file size 5)</h4>
-          <label class="uplBtn">
-            <input type="file"@change="onWAVSelected"/>
-            Upload
-          </label>
-        </div>
-        <div class="uploadHolder">
-          <h2 class="reg">
-            Stems Upload
-          </h2>
-          <h4 class="reg">(Max file size 5)</h4>
-          <label class="uplBtn">
-            <input type="file"@change="onStemsSelected"/>
-            Upload
-          </label>
-        </div>
-        <button class="uplBtn" type="submit">Submit</button>
-      </form>
 
     </div>
   </div>
 </template>
 
 <script>
+    import UploadSalmonForm from "../../components/upload/UploadSalmonForm";
+
     export default {
       asyncData(){
         return{
-          MP3SelectedFile: null,
-          WAVSelectedFile: null,
-          StemsSelectedFile: null,
-          ImageSelectedFile: null,
+          /*FORM DATA*/
+          tags:'',
+          producer:'',
+          selectedGenre: '',
+          filterTag1:[],
+          filterTag2:[],
+          filterTag1C:'',
+          filterTag2C:'',
+          title:'',
+          userTag1:'',
+          userTag2:'',
+          bpm:'',
+          genre:'',
+          /*Pre-Fill Genres*/
+          genres:[
+            { name: "Hip Hop"},
+            { name: "Trap"},
+            { name: "R&B"},
+            { name: "EDM"},
+            { name: "Pop"},
+          ]
         }
       },
+      computed:{
+        uplStage(){
+          return this.$store.state.forms.stage
+        }
+      },
+      components: {UploadSalmonForm},
       methods:{
-        onImageSelected(event) {
-          this.ImageSelectedFile = event.target.files[0]
+        async dbUpload() {
+          await this.$axios.$post('http://127.0.0.1:3001/beatsFull',{
+            title: this.title,
+            userTag1: this.userTag1,
+            userTag2: this.userTag2,
+            filterTag1: this.filterTag1C,
+            filterTag2: this.filterTag2C,
+            bpm: this.bpm,
+            producer: this.producer,
+            genre: this.genre
+          }).then(res =>{
+            console.log(res)
+          })
         },
-        onMP3Selected(event) {
-          this.MP3SelectedFile = event.target.files[0]
+        onTitleComplete(input){
+          this.title = input.target.value
         },
-        onWAVSelected(event) {
-          this.WAVSelectedFile = event.target.files[0]
+        onTag1Complete(input){
+          this.userTag1 = input.target.value
         },
-        onStemsSelected(event) {
-          this.StemsSelectedFile = event.target.files[0]
+        onTag2Complete(input){
+          this.userTag2 = input.target.value
         },
-        async onSubmit() {
-          let mp3Fd = new FormData ()
-          let wavFd = new FormData ()
-          let stemFd = new FormData ()
-          let imageFd = new FormData ()
-
-          mp3Fd.append('mp3File', this.MP3SelectedFile)
-          wavFd.append('wavFile', this.WAVSelectedFile)
-          stemFd.append('stemsFile', this.StemsSelectedFile)
-          imageFd.append('imageFile', this.ImageSelectedFile)
-
-          await this.$axios.$post('http://35.203.65.95:80/beats/mp3', mp3Fd)
-            .then(res=>{
-              console.log(res)
-            })
-          await this.$axios.$post('http://35.203.65.95:80/beats/wav', wavFd)
-            .then(res=>{
-              console.log(res)
-            })
-          await this.$axios.$post('http://35.203.65.95:80/beats/stems', stemFd)
-            .then(res=>{
-              console.log(res)
-            })
-          await this.$axios.$post('http://35.203.65.95:80/beats/images', imageFd)
-            .then(res=>{
-              console.log(res)
-            })
+        onBPMComplete(input){
+          this.bpm = input.target.value
+        },
+        onFilterTag1Complete(input){
+          this.filterTag1C = input.target.value
+        },
+        onFilterTag2Complete(input){
+          this.filterTag2C = input.target.value
+        },
+        onGenreComplete(input){
+          this.genre = input.target.value
+        },
+        onConfirmComplete(input){
+          this.producer = input.target.value
+        }
+      },
+      watch:{
+        selectedGenre: async function (e) {
+          console.log(e)
+          if (e === 'Trap'){
+            const trapFilteredTags = await this.$axios.$get('http://127.0.0.1:3001/tags/trap')
+            this.tags = trapFilteredTags
+          }else if(e === 'Hip Hop'){
+            const hiphopFilteredTags = await this.$axios.$get('http://127.0.0.1:3001/tags/hiphop')
+            this.tags = hiphopFilteredTags
+          }else if(e === 'R&B'){
+            const rbFilteredTags = await this.$axios.$get('http://127.0.0.1:3001/tags/r&b')
+            this.tags = rbFilteredTags
+          }else if(e === 'EDM'){
+            const rbFilteredTags = await this.$axios.$get('http://127.0.0.1:3001/tags/edm')
+            this.tags = rbFilteredTags
+          }else if(e === 'Pop'){
+            const rbFilteredTags = await this.$axios.$get('http://127.0.0.1:3001/tags/pop')
+            this.tags = rbFilteredTags
+          }
         }
       }
     }
 </script>
 
 <style scoped>
-  h4{
-    margin-left: 15px;
-  }
-  h2{
-    margin-left: 10px;
-  }
-  input[type="file"] {
-    display: none;
-  }
-  .uploadHolder{
-    display: flex;
-    width: 400px;
-    height: 100px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    flex-direction: column;
-    border: 2px solid #000;
-    border-radius: 20px;
-    background-color: rgba(0, 0, 0, 0.3);
-    box-shadow: 1px 1px 20px 3px #000;
-  }
-  .uplBtn{
+  button{
     text-align: center;
     color: white;
     font-size: 20px;
@@ -137,7 +163,29 @@
     width: 20%;
     height: 30px;
   }
-  form{
+  select{
+    border: 1px solid #000;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.3);
+    font-family: Nunito, sans-serif;
+    color: #fff;
+    font-weight: 600;
+    width: 400px;
+  }
+  .formInput{
+    height: 40px;
+    border: 2px solid #000;
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.3);
+    font-family: Nunito, sans-serif;
+    color: #fff;
+    font-weight: 700;
+    padding: 8px 12px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    width: 400px;
+  }
+  .formInfo{
     display: flex;
     flex-direction: column;
     padding: 40px 20px;
@@ -145,6 +193,24 @@
     border: 3px solid #000;
     border-radius: 20px;
     box-shadow: 1px 1px 20px 0 #000;
+    margin: 5px 5px;
+  }
+  .formHolder{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .slide-fade-enter-active {
+    transition: all .8s cubic-bezier(.67,.74,.01,.98);
+  }
+  .slide-fade-leave-active {
+    transition: all .8s cubic-bezier(.67,.74,.01,.98);
+  }
+  .slide-fade-enter, .slide-fade-leave-to
+    /* .slide-fade-leave-active below version 2.1.8 */ {
+    transform: translateX(40px);
+    opacity: 0;
   }
   h1{
     text-align: center;

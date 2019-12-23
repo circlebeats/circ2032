@@ -1,13 +1,13 @@
 <template>
   <tabs transitionName="fade">
     <tab :title="'HIP HOP'">
-      <input type="checkbox" id="club" value="club"  @change="filterBeats">
+      <input type="checkbox" id="club" value="club"  @change="filterBeats" v-model="checked">
       <label for="club">Club</label>
       <br>
-      <input type="checkbox" id="bass-heavy" value="Bass Heavy" >
+      <input type="checkbox" id="bass-heavy" value="Bass Heavy" @change="filterBeats" v-model="checked">
       <label for="bass-heavy">Bass Heavy</label>
       <br>
-      <input type="checkbox" id="southern" value="Southern" >
+      <input type="checkbox" id="southern" value="Southern" v-model="checked">
       <label for="southern">Southern</label>
       <br>
       <input type="checkbox" id="bouncy" value="Bouncy" >
@@ -201,6 +201,8 @@
     name: "HomepageGenreFilter",
     asyncData(){
       return {
+        checkedTags:[],
+        checked:''
       }
     },
     computed: {
@@ -212,20 +214,20 @@
       filterBeats: function (e) {
         // console.log(e.target.id)
         // console.log(e.target.checked)
-        let checkedTags = []
-        if(e.target.checked === true){
-          checkedTags.unshift(e.target.id)
-          // this.$store.commit('SET_LIST_SEARCH',{
-          //   tag: e.target.id
-          // })
-        } else if(e.target.checked === false){
-          checkedTags.shift()
-        } else {
-          console.log('no events')
-        }
-        this.$store.commit('SET_LIST_SEARCH',{
-          tags: checkedTags
-        })
+        // if(e.target.checked === true){
+        //   this.checkedTags.unshift(e.target.id)
+        //   // this.$store.commit('SET_LIST_SEARCH',{
+        //   //   tag: e.target.id
+        //   // })
+        // } else if(e.target.checked === false){
+        //   this.checkedTags.shift()
+        // } else {
+        //   console.log('no events')
+        // }
+        console.log(this.checked)
+        // this.$store.commit('SET_LIST_SEARCH',{
+        //   tags: checkedTags
+        // })
       }
     }
   };

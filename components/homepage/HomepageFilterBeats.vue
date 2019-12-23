@@ -11,7 +11,7 @@
       name: "HomepageFilterBeats",
       computed: {
         beats() {
-          return this.$store.getters.allBeats
+          return this.$store.state.filBeats
         },
       }
     }
