@@ -40,7 +40,12 @@
                   </option>
                 </select>
                 <input type="text" placeholder="confirm producer name" @change="onConfirmComplete">
-                <button @click="dbUpload">Confirm Upload</button>
+                <div v-if="this.$store.state.forms.valid === false">
+                  <div class="unclick">Wait for uploads to finish</div>
+                </div>
+                <div v-else>
+                 <button @click="dbUpload">Confirm Upload</button>
+                </div>
               </form>
             </div>
           </transition>
@@ -139,11 +144,11 @@
             const rbFilteredTags = await this.$axios.$get('http://35.203.87.148:80/tags/r&b')
             this.tags = rbFilteredTags
           }else if(e === 'EDM'){
-            const rbFilteredTags = await this.$axios.$get('http://35.203.87.148:80/tags/edm')
-            this.tags = rbFilteredTags
+            const edmFilteredTags = await this.$axios.$get('http://35.203.87.148:80/tags/edm')
+            this.tags = edmFilteredTags
           }else if(e === 'Pop'){
-            const rbFilteredTags = await this.$axios.$get('http://35.203.87.148:80/tags/pop')
-            this.tags = rbFilteredTags
+            const popFilteredTags = await this.$axios.$get('http://35.203.87.148:80/tags/pop')
+            this.tags = popFilteredTags
           }
         }
       }
@@ -151,6 +156,12 @@
 </script>
 
 <style scoped>
+  .unclick{
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 20px;
+    width: 50%;
+    color: white;
+  }
   button{
     text-align: center;
     color: white;
@@ -159,8 +170,7 @@
     border-radius: 20px;
     background-color: rgba(127, 10, 10, 0.5);
     box-shadow: 1px 1px 20px 0 #000;
-
-    width: 20%;
+    width: 50%;
     height: 30px;
   }
   select{

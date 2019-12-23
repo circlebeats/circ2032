@@ -1,43 +1,66 @@
 <template>
+  <!--"UPLOAD-SALMON-FORM" COMPONENT TO UPLOAD BEATS TO SERVER-->
   <form @submit.prevent="onSubmit"
         id="uploadForm"
   >
+    <!--"IMAGE-SELECT" FORM INPUT-->
     <label class="uplBtn">
       <input type="file" @change="onImageSelected">
       Image Upload
     </label>
-
+    <!--"MP3-SELECT" FORM INPUT-->
     <div class="uploadHolder">
       <h2 class="reg">
         MP3 Upload
       </h2>
-      <h4 class="reg">(Max file size 5)</h4>
-      <label class="uplBtn">
-        <input type="file"@change="onMP3Selected"/>
-        Upload
-      </label>
-      <div v-if=""></div>
-      <h2>{{MP3SelectedFile}}</h2>
+        <h4 class="reg">(Max file size 5)</h4>
+          <div v-if="this.$store.state.forms.mp3 === false">
+            <label class="uplBtn">
+              <input type="file"@change="onMP3Selected"/>
+              Upload
+            </label>
+          </div>
+          <div v-else>
+            <div class="cUpl">
+              UPLOADED
+            </div>
+          </div>
     </div>
+    <!--"WAV-SELECT" FORM INPUT-->
     <div class="uploadHolder">
       <h2 class="reg">
         Wav Upload
       </h2>
-      <h4 class="reg">(Max file size 5)</h4>
-      <label class="uplBtn">
-        <input type="file"@change="onWAVSelected"/>
-        Upload
-      </label>
+        <h4 class="reg">(Max file size 5)</h4>
+          <div v-if="this.$store.state.forms.wav === false">
+            <label class="uplBtn">
+              <input type="file"@change="onWAVSelected"/>
+              Upload
+            </label>
+          </div>
+          <div v-else>
+            <div class="cUpl">
+              UPLOADED
+            </div>
+          </div>
     </div>
+    <!--"STEMS-SELECT" FORM INPUT-->
     <div class="uploadHolder">
       <h2 class="reg">
         Stems Upload
       </h2>
-      <h4 class="reg">(Max file size 5)</h4>
-      <label class="uplBtn">
-        <input type="file"@change="onStemsSelected"/>
-        Upload
-      </label>
+        <div v-if="this.$store.state.forms.wav === false">
+          <h4 class="reg">(Max file size 5)</h4>
+          <label class="uplBtn">
+            <input type="file"@change="onStemsSelected"/>
+            Upload
+          </label>
+        </div>
+        <div v-else>
+          <div class="cUpl">
+            UPLOADED
+          </div>
+        </div>
     </div>
     <button class="uplBtn" type="submit">Next Step</button>
   </form>
@@ -54,6 +77,12 @@
 </script>
 
 <style scoped>
+  .cUpl{
+    height: 40px;
+    width: 100px;
+    background-color: rgba(117, 111, 122, 0.56);
+    text-align: center;
+  }
   h4{
     margin-left: 15px;
   }
