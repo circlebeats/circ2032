@@ -4,7 +4,7 @@
       <div class="a2Wishlist"></div>
       <div class="playerDiv">
         <vue-plyr>
-          <audio id="player" controls>
+          <audio id="player" controls preload="auto">
             <source :src="url" type="audio/mp3" />
           </audio>
         </vue-plyr>

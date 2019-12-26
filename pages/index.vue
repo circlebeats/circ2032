@@ -2,7 +2,6 @@
   <div class="container">
     <SearchBar/>
     <div class="section">
-      <!--Merge-->
       <h1>Featured Beats</h1>
       <div class="row" id="row1">
         <HomepageBeatHolder

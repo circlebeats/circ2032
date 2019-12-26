@@ -24,7 +24,7 @@ export const actions = {
     await dispatch('fetchAllBeats')
   },
   async fetchAllBeats({ commit }) {
-    const beats = await this.$axios.$get('http://35.203.87.148:80/beatsFull')
+    const beats = await this.$axios.$get('http://127.0.0.1:3001/beatsFull')
     commit('setBeats', beats)
     const filBeats = await this.$axios.$get('http://35.203.87.148:80/beatsFull')
     commit('setFilBeats', filBeats)

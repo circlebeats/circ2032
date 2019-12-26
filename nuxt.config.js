@@ -53,7 +53,32 @@ module.exports = {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     'nuxt-webfontloader',
+    // Doc: https://www.npmjs.com/package/nuxt-socket-io
+    'nuxt-socket-io',
   ],
+  io: {
+    sockets: [
+      // "NUXT-SOCKET.IO" SETUP GLOBAL CONNECTIONS
+      {
+        name: 'beats',
+        url: 'http://localhost:3000',
+        default: true,
+      },
+      { name: 'work', url: 'http://somedomain1:3000' },
+      { name: 'car', url: 'http://somedomain2:3000' },
+      { name: 'tv', url: 'http://somedomain3:3000' },
+      // "NUXT-SOCKET.IO" VUEX EXAMPLE
+      // {
+      //   name: 'test',
+      //   url: 'http://localhost:4000',
+      //   vuex: {
+      //     mutations: ['examples/SET_PROGRESS'],
+      //     actions: ['FORMAT_MESSAGE']
+      //   }
+      // }
+    ]
+  },
+},
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
