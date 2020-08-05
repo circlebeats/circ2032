@@ -13,7 +13,7 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
     "cross-env": "^5.2.0",
-    "fastify": "^1.13.3",
+    "fastify": "^2.15.1",
     "firebase": "^7.5.2",
     "knex": "^0.20.4",
     "nuxt": "^2.0.0",
