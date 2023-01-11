@@ -15,7 +15,7 @@
     "cross-env": "^5.2.0",
     "fastify": "^1.13.3",
     "firebase": "^7.5.2",
-    "knex": "^0.20.4",
+    "knex": "^2.4.0",
     "nuxt": "^2.0.0",
     "nuxt-socket-io": "^1.0.6",
     "nuxt-webfontloader": "^1.1.0",
